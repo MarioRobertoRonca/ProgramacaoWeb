@@ -8,6 +8,9 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+const db = require('./config/database')
+db('mongodb://localhost:27017/4not2020')
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -17,4 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+const fornecedor  = require('./routes/fornecedor')
+app.use('/fornecedor', fornecedor)
 module.exports = app;
