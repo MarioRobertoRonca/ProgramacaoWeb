@@ -16,13 +16,19 @@ controller.novo = async (req, res) => {
 
 // Este método para retornar os fornecedores;
 controller.listar = async (req, res) => {
-    try {
-        //find(), sem parâmetros, retorna todos
-        const lista = await Fornecedor.find();
-        res.send(lista); //HTTP 200  impicito;
-    } catch (erro) {
-        console.log(erro);
-        res.status(500).send(erro);
+    
+    if (Object.keys(req.query).length>0) {//se houver query string
+        
+    } else {// sem query string
+
+        try {
+            //find(), sem parâmetros, retorna todos
+            const lista = await Fornecedor.find();
+            res.send(lista); //HTTP 200  impicito;
+        } catch (erro) {
+            console.log(erro);
+            res.status(500).send(erro);
+        }
     }
 }
 // esse é para encontrar
@@ -72,5 +78,28 @@ controller.excluir = async (req, res) => {
         res.status(500).send(erro)
     }
 }
+
+async function busca(req, res){
+    let criterio = {}
+
+    const atrib = Object.keys(req.query)[0]
+    const valor = Object.values(req.query)[0]
+
+    //option: 'i' case insentive
+    criterio[atrib] = {$regex: valor, $options: 'i'}
+
+    console.log('critério')
+    console.log(criterio)
+
+    try{
+        const lista = await Fornecedor.find(criterio)
+        res.send(lista)
+    }
+    catch(erro){
+        console.log(erro)
+        res.status(500).send(erro)
+    }
+}
+   
 
 module.exports = controller
