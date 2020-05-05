@@ -1,10 +1,10 @@
-const Fornecedor = require('../models/Fornecedor')
+const Produto = require('../models/Produto')
 
 const controller = {} // Objeto vazio
 
 controller.novo = async (req, res) => {
    try {
-      await Fornecedor.create(req.body)
+      await Produto.create(req.body)
       // HTTP Status 201: Created
       res.status(201).end()
    }
@@ -23,7 +23,8 @@ controller.listar = async (req, res) => {
    else { // sem query string
       try {
          // find(), sem parâmetros, retorna todos
-         const lista = await Fornecedor.find()
+         // O parametro populate() é  o *ATRIBUTO* relacionado
+         const lista = await Produto.find().populate('fornecedor')
          res.send(lista) // HTTP 200 implícito
       }
       catch {
@@ -38,7 +39,7 @@ controller.obterUm = async (req, res) => {
 
    try {
       const id = req.params.id
-      const obj = await Fornecedor.findById(id)
+      const obj = await Produto.findById(id)
       if (obj) { // obj foi encontrado
          res.send(obj) // HTTP 200 implícito
       }
@@ -56,7 +57,7 @@ controller.obterUm = async (req, res) => {
 controller.atualizar = async (req, res) => {
    try {
       const id = req.body._id
-      const obj = await Fornecedor.findByIdAndUpdate(id, req.body)
+      const obj = await Produto.findByIdAndUpdate(id, req.body)
       if (obj) { // obj encontrado e atualizado
          // HTTP 204: No content
          res.status(204).end()
@@ -74,7 +75,7 @@ controller.atualizar = async (req, res) => {
 controller.excluir = async (req, res) => {
    try {
       const id = req.body._id
-      const obj = await Fornecedor.findByIdAndDelete(id)
+      const obj = await Produto.findByIdAndDelete(id)
       if (obj) {
          res.status(204).end()
       }
@@ -101,7 +102,7 @@ async function busca(req, res) {
    console.log(criterio)
 
    try {
-      const lista = await Fornecedor.find(criterio)
+      const lista = await Produto.find(criterio)
       res.send(lista)
    }
    catch(erro) {

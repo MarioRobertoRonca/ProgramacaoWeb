@@ -1,3 +1,4 @@
+// 4º Parte criar routa
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -20,6 +21,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//Fornecedor
 const fornecedor  = require('./routes/fornecedor')
 app.use('/fornecedor', fornecedor)
+
+//Produto
+const produto = require('./routes/produto')
+app.use('/produto', produto)
+
 module.exports = app;
