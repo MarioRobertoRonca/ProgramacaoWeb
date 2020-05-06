@@ -23,10 +23,18 @@ app.use('/users', usersRouter);
 
 //Fornecedor
 const fornecedor  = require('./routes/fornecedor')
-app.use('/fornecedor', fornecedor)
+app.use('/fornecedor', fornecedor);
 
 //Produto
 const produto = require('./routes/produto')
-app.use('/produto', produto)
+app.use('/produto', produto);
+
+//Cliente
+const cliente = require('./routes/cliente')
+app.use('/cliente', cliente);
+
+//venda
+const venda = require('./routes/venda')
+app.use('/venda', venda);
 
 module.exports = app;
