@@ -1,10 +1,10 @@
-const Venda = require('../models/Venda')
+const ItemVenda = require('../models/ItemVenda')
 
 const controller = {} // Objeto vazio
 
 controller.novo = async (req, res) => {
    try {
-      await Venda.create(req.body)
+      await ItemVenda.create(req.body)
       // HTTP Status 201: Created
       res.status(201).end()
    }
@@ -23,11 +23,20 @@ controller.listar = async (req, res) => {
    else { // sem query string
       try {
          // find(), sem parâmetros, retorna todos
+         //const lista = await ItemVenda.find().populate('venda').populate('produto')
 
-         //escolhendo trazer no population()
-         const lista = await Venda.find().populate({path:'cliente', select: 'nome cpf'})
-         // Escolher os dados que vão aparecer
-         //const lista = await Venda.find({}, 'num_venda cliente').populate('cliente')
+         // Population dentro de populate() / populate() de segundo nível 
+         const lista = await ItemVenda.find().populate(
+            //path: nome do campo populado(1ª nível)
+            //populate: nome do campo populado(2º nível)
+            { path:'venda', populate: 'cliente'}
+         )
+         .populate(
+            // path: nome do campo a ser populado
+            // select: lista de campos a serem exibidos separados por espaço
+            { path: 'produto', select: 'descricao data_validade fornecedor', populate: 'fornecedor'}
+         )
+
          res.send(lista) // HTTP 200 implícito
       }
       catch {
@@ -42,7 +51,7 @@ controller.obterUm = async (req, res) => {
 
    try {
       const id = req.params.id
-      const obj = await Venda.findById(id)
+      const obj = await ItemVenda.findById(id)
       if (obj) { // obj foi encontrado
          res.send(obj) // HTTP 200 implícito
       }
@@ -60,7 +69,7 @@ controller.obterUm = async (req, res) => {
 controller.atualizar = async (req, res) => {
    try {
       const id = req.body._id
-      const obj = await Venda.findByIdAndUpdate(id, req.body)
+      const obj = await ItemVenda.findByIdAndUpdate(id, req.body)
       if (obj) { // obj encontrado e atualizado
          // HTTP 204: No content
          res.status(204).end()
@@ -78,7 +87,7 @@ controller.atualizar = async (req, res) => {
 controller.excluir = async (req, res) => {
    try {
       const id = req.body._id
-      const obj = await Venda.findByIdAndDelete(id)
+      const obj = await ItemVenda.findByIdAndDelete(id)
       if (obj) {
          res.status(204).end()
       }
@@ -105,7 +114,7 @@ async function busca(req, res) {
    console.log(criterio)
 
    try {
-      const lista = await Venda.find(criterio)
+      const lista = await ItemVenda.find(criterio)
       res.send(lista)
    }
    catch(erro) {

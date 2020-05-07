@@ -1,13 +1,13 @@
 
-                                 Moongoo DB
-
+                                 Mongoose 
+Documentação -> mongoose find()
 Pacotes:
 	*yarn add mongoose-sequence* -> Atribuir número nova a cada venda
 		*const mongoose = require('mongoose-sequence')(mongoose);* -> Parâmetro usado no inicio da classe
-		*esquema.plugin(mongooseSeq, {inc_field: 'num_venda', start_seq:1});* É um plugin do "mongoose_sequence" color parâmetro no final da classe, o número 1 		no final da expressão mostrar de onde ele vai começar a contar.
+		*esquema.plugin(mongooseSeq, {inc_field: 'num_venda', start_seq:1});* É um plugin do "mongoose_sequence" color parâmetro no final da classe, o número 1 no final da expressão mostra de onde ele vai começar a contar.
 
 Codigos:
 	*yarn start* -> Deixar o banco online
 	*Ctrl+c* -> Deixar o banco offline
-	*populate'fornecedor'* -> Usado  para trazer os dados da entidade relacionada  "const lista = await Produto.find().populate('fornecedor')".
-	*                                  
+	*.populate'fornecedor'* -> Usado  para trazer os dados da entidade relacionada  "const lista = await Produto.find().populate('fornecedor')".
+	*.populate({path:'cliente', select: 'nome cpf'}) -> Usado para selicionar os dados.                                  
