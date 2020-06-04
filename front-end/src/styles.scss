@@ -1,0 +1,8 @@
+//Abra o arquivo src/styles.scss e acrescente a seguinte linha no início:
+// Importar os  icones  do material design ícones
+@import "~material-design-icons/iconfont/material-icons.css";
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
