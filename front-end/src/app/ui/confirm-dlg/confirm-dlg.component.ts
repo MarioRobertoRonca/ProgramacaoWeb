@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+export interface DialogData {
+  question: string;
+}
 
 @Component({
   selector: 'app-confirm-dlg',
@@ -7,9 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmDlgComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

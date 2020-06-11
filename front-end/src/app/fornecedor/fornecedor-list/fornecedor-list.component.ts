@@ -1,6 +1,8 @@
+import { ConfirmDlgComponent } from './../../ui/confirm-dlg/confirm-dlg.component';
 import { FornecedorService } from './../fornecedor.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-fornecedor-list',
@@ -15,7 +17,8 @@ export class FornecedorListComponent implements OnInit {
 
   constructor( 
       private fornecedorSrv: FornecedorService,
-      private snackBar : MatSnackBar
+      private snackBar : MatSnackBar,
+      private dialog: MatDialog
     ) {}
 
   async ngOnInit() {
@@ -23,8 +26,16 @@ export class FornecedorListComponent implements OnInit {
     console.log(this.fornecedores);
   }
 
-  async excluirItem(id: string){
-    if(confirm('Deseja realmente excluir este intem?')){
+  async excluirItem(id: string) {
+    const dialogRef = this.dialog.open(ConfirmDlgComponent, {
+      width: '50%',
+      data: {question: 'Deseja realmente excluir este item?'}
+    });
+
+    let result = await dialogRef.afterClosed().toPromise();
+    
+    //if(confirm('Deseja realmente excluir este item?')) {
+    if(result) {
       try{
         await this.fornecedorSrv.excluir(id)
         this.ngOnInit() //Atualizar os dados da tabela
