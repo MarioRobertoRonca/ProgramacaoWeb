@@ -13,6 +13,7 @@
     "mongoose": "^5.9.1",
     "mongoose-sequence": "^5.2.2",
     "morgan": "~1.9.1",
+    "ngx-mask": "^9.1.2",
     "nodemon": "^2.0.2"
   }
 }

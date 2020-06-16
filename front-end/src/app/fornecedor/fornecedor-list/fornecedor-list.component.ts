@@ -13,7 +13,7 @@ export class FornecedorListComponent implements OnInit {
 
   public fornecedores: any =[] //Vetor vazio
   
-  displayedColumns: string[] = ['razao_social', 'nome_fantasia', 'telefone', 'email', 'excluir']
+  displayedColumns: string[] = ['razao_social', 'nome_fantasia', 'telefone', 'email','editar', 'excluir']
 
   constructor( 
       private fornecedorSrv: FornecedorService,

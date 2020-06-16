@@ -156,6 +156,7 @@ __metadata:
     mongoose: ^5.9.1
     mongoose-sequence: ^5.2.2
     morgan: ~1.9.1
+    ngx-mask: ^9.1.2
     nodemon: ^2.0.2
   languageName: unknown
   linkType: soft
@@ -1458,6 +1459,19 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"ngx-mask@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "ngx-mask@npm:9.1.2"
+  dependencies:
+    tslib: ^1.10.0
+  peerDependencies:
+    "@angular/common": ^9.1.0
+    "@angular/core": ^9.1.0
+    "@angular/forms": ^9.1.0
+  checksum: 2/c69a7e73b9c20c205d9eb436f39411460ce6c9a51e8026f7a366681450f5f743f865fe33d8f703a43cecc06d75093dc99ef3f65ead87baacf930dc306ea12ca6
+  languageName: node
+  linkType: hard
+
 "node-gyp@npm:latest":
   version: 6.1.0
   resolution: "node-gyp@npm:6.1.0"
@@ -2184,6 +2198,13 @@ fsevents@~2.1.2:
     psl: ^1.1.28
     punycode: ^2.1.1
   checksum: 2/bf5d6fac5ce0bebc5876cb9b9a79d3d9ea21c9e4099f3d3e64701d6ba170a052cb88cece6737ec2473bac4f0a4f6c75d46ec17985be8587c6bbdd38d91625cb4
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^1.10.0":
+  version: 1.13.0
+  resolution: "tslib@npm:1.13.0"
+  checksum: 2/5dc3bdaea3b67c76ef4a14c28fcb2171da7bcf292fd9c59a260098729626b1ce766c52b588f08e324ed9a0c52ea8a93a815920f980d75981abc9d850fbf310fb
   languageName: node
   linkType: hard
 
