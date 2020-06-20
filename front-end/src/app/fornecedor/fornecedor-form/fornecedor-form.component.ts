@@ -18,10 +18,4 @@ export class FornecedorFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  voltar(x){
-
-  }
-  salvar(x){
-    
-  }
 }
