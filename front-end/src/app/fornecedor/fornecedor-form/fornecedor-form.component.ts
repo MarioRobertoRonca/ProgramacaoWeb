@@ -1,4 +1,8 @@
+import { FornecedorService } from './../fornecedor.service';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-fornecedor-form',
@@ -11,11 +15,57 @@ export class FornecedorFormComponent implements OnInit {
 
   fornecedor: any = {} //Objeto vazio
   
-  constructor() { }
-
+  constructor(
+    private fornecedorSrv : FornecedorService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private actRoute: ActivatedRoute
+  ) { }
+  
   
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    //Capturando os parâmetro da rota
+    let params = this.actRoute.snapshot.params
+    //Exite um parâmetro chamando  : id ?
+    if(params['id']) {
+      //É caso de atualização. É necessário consultar o back-end
+      //para recuperar o registo e colocálo para edição
+      try{
+        this.fornecedor = await this.fornecedorSrv.obterUM(params['id'])
+        this.title = 'Atualizando fornecedor'
+      }
+      catch(erro) {
+        this.snackBar.open(erro.message, 'Que pena!', {duration:5000})
+      }
+    }
   }
 
+  voltar(x){
+
+  }
+  async salvar( form: NgForm){
+    //Só vai salvar se o form for valido 
+    if(form.valid){
+      try{
+        let msg = 'Fornecedor atualizado com sucesso.'
+        //Se existir o campo _id, é caso de atualização
+        if(this.fornecedor._id) {
+          await this.fornecedorSrv.atualizar(this.fornecedor)
+        }
+        //Se não existir o _id é caso de atualização
+        else{
+          await this.fornecedorSrv.novo(this.fornecedor)
+          msg = 'Fornecedor criado com sucesso. '
+        }
+        //Dá o feedBack para o usúario 
+        this.snackBar.open( 'Fornecedor criado com sucesso' , 'Entendi', {duration: 50000})
+        //Voltar à listagem 
+        this.router.navigate(['/fornecedor'])
+      }
+      catch(erro){
+        this.snackBar.open(erro.message, 'Que pena!',{duration: 5000})
+      }
+    }
+  }
 }
