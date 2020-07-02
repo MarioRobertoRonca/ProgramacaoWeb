@@ -1,3 +1,5 @@
+import { VendaFormComponent } from './venda/venda-form/venda-form.component';
+import { VendaListComponent } from './venda/venda-list/venda-list.component';
 import { FornecedorFormComponent } from './fornecedor/fornecedor-form/fornecedor-form.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,6 +18,18 @@ const routes: Routes = [
   {
     path: 'fornecedor/:id', //Editar um fornecedor já existente
     component: FornecedorFormComponent
+  },
+  {
+    path: 'venda', // Para listar a venda
+    component: VendaListComponent
+  },
+  {
+    path: 'venda/novo', // Abri o formulário 
+    component: VendaFormComponent
+  },
+  {
+    path: 'venda/:id', // Para abir o formulário para update 
+    component: VendaFormComponent
   }
 ];
 
