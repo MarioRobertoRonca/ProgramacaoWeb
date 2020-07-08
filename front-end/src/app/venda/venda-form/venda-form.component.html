@@ -33,43 +33,34 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <!--
+    <mat-form-field>
+      <mat-label>Data de venda</mat-label>
+      <input name="data_venda" matInput [(ngModel)]="venda.data_venda" [matDatepicker]="data_venda" required>
+      <mat-datepicker-toggle matSuffix [for]="data_venda"></mat-datepicker-toggle>
+      <mat-datepicker #data_venda></mat-datepicker>
+    </mat-form-field>
+   -->
 
-    
-      
-
+   <!-- forma de pagamento -->
   <mat-form-field>
-     <mat-label>CNPJ</mat-label>
-     <input matInput [(ngModel)]="venda.cnpj" name="cnpj" required placeholder="Informe o CNPJ da empresas"
-        mask="00.000.000/0000-00">
-  </mat-form-field>
-
-  <mat-form-field>
-     <mat-label>Inscrição Estadual</mat-label>
-     <input matInput [(ngModel)]="venda.inscricao_estadual" name="inscricao_estadual" required
-        placeholder="Informe a inscrição estadual da empresa">
-  </mat-form-field>
-
-  <mat-form-field>
-     <mat-label>Endereço</mat-label>
-     <textarea matInput [(ngModel)]="venda.endereco" name="endereco" required
-        placeholder="Informe o endereço da empresa" rows="4">
-        </textarea>
-  </mat-form-field>
-
-  <mat-form-field>
-     <mat-label>Telefone</mat-label>
-     <mat-icon matPrefix>contact_phone</mat-icon>
-     <input matInput [(ngModel)]="venda.telefone" name="telefone" required
-        placeholder="Informe a inscrição telefone da empresa">
-  </mat-form-field>
-
-  <mat-form-field>
-     <mat-label>E-mail</mat-label>
-     <mat-icon matPrefix>contact_mail</mat-icon>
-     <input type="email" matInput [(ngModel)]="venda.email" name="email" required
-        placeholder="Informe a inscrição E-mail da empresa">
-  </mat-form-field>
-
+        
+        <mat-select placeholder="Selecionar a forma de pagamento" 
+        required [(ngModel)]="venda.forma_pagamento" name="forma_pagamento">
+            <mat-option *ngFor="let fp of formasPagamento" [value]="fp.codigo">
+                    {{fp.nome}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!--Data de pagamento
+    <mat-form-field>
+      <mat-label>Data de pagamento</mat-label>
+      <input name="data_pagamento" matInput [(ngModel)]="venda.data_pagamento" [matDatepicker]="data_pagamento">
+      <mat-datepicker-toggle matSuffix [for]="data_pagamento"></mat-datepicker-toggle>
+      <mat-datepicker #data_pagamento></mat-datepicker>
+    </mat-form-field>
+   -->
+  
   <mat-toolbar class="form-buttons">
      <mat-toolbar-row>
         <button mat-raised-button type="submit" color="accent">
@@ -83,3 +74,14 @@
 
 </form>
 
+
+<!--Só exibe a listagem de venda quando existir o item da venda -->
+<ng-container *ngIf="venda._id">
+  <hr>
+
+  <!--
+    Listagem  de itens da venda , recebendo como parâmtro qual
+    a venda cusjo os itens serão exibidos
+  -->
+  <app-item-venda-list [venda]="venda._id"></app-item-venda-list>
+</ng-container>

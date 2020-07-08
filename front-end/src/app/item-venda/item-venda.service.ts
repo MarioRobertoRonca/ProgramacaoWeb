@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.prod';
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env} from './../../environments/environment';
@@ -14,7 +14,7 @@ export class ItemVendaService {
   */  
   constructor(private http: HttpClient) { }
 
-  private apiUri : string = env.apiBaseUri + 'item-venda/'
+  private apiUri : string = env.apiBaseUri + 'item_venda/'
 
   listar(){
     return this.http.get(this.apiUri).toPromise()
@@ -33,5 +33,9 @@ export class ItemVendaService {
   }
   obterUM(id: string){
     return this.http.get(this.apiUri + id).toPromise()
+  }
+
+  filtrarVenda(id: string){
+    return this.http.get(this.apiUri + 'venda/' + id).toPromise()
   }
 }
