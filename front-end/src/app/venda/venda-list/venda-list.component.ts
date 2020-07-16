@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class VendaListComponent implements OnInit {
 
-  public vendas: any =[] //Vetor vazio
+    public vendas: any = {} //Vetor vazio
   
   displayedColumns: string[] = ['num_venda','cliente', 'data_venda',
   'forma_pagamento', 'data_pagamento', 'editar', 'excluir']
